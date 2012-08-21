@@ -1,0 +1,53 @@
+Course(MATH1105)
+Course(MATH1130)
+Course(CSCI1911)
+Course(CSCI2911)
+Course(CSCI2912)
+Course(CSCI2916)
+
+Credits(MATH1105,3)
+Credits(MATH1130,3)
+Credits(CSCI1911,3)
+Credits(CSCI2911,3)
+Credits(CSCI2912,3)
+Credits(CSCI2916,3)
+
+Term(201030)
+Term(201070)
+Term(201090)
+Term(201110)
+Term(201130)
+
+Init(Unmet(MATH1130) ^ Unmet(MATH1105) ^ Unmet(CSCI1911) ^ Unmet(CSCI2911) ^ Unmet(CSCI2912) ^ Unmet(CSCI2916)
+
+Goal(Met(MATH1130,termA) ^ Met(MATH1105,termB) ^ Met(CSCI1911,termC) ^ Met(CSCI2911,termD) ^ Met(CSCI2912,termE) ^ Met(CSCI2916,termF))
+
+Action(RegisterMATH1105(term)
+	Precond: Unmet(MATH1105) ^ #Credits(term) < 9
+	Effect: Met(MATH1105,term)
+
+Action(RegisterMATH1130(term)
+	Precond: Unmet(MATH1130) ^ Met(MATH110,previousTerm) ^ previousTerm < term ^ #Credits(term) < 9
+	Effect: Met(MATH1130,term)
+
+Action(RegisterCSCI1911(term)
+	Precond: Unmet(CSCI1911) ^ #Credits(term) < 9
+	Effect: Met(CSCI1911,term)
+
+Action(RegisterCSCI2911(term)
+	Precond: Unmet(CSCI2911) ^ Met(CSCI1911,previousTerm) ^ previousTerm < term ^ #Credits(term) < 9
+	Effect: Met(CSCI2911,term)
+...
+
+Met(MATH1105,201030)
+Met(MATH1130,201030)
+Met(CSCI2916,201070)
+Met(CSCI2912,201090)
+Met(CSCI1911,201110)
+Met(CSCI2911,201130)
+
+
+
+
+
+

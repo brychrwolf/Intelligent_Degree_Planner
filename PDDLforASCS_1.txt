@@ -1,0 +1,59 @@
+PDDL Description for the ASCS Degree
+
+Course(MATH1105)
+Course(MATH1130)
+Course(CSCI1911)
+Course(CSCI2911)
+Course(CSCI2912)
+Course(CSCI2916)
+
+Credit(MATH1105, 3)
+Credit(MATH1130, 3)
+Credit(CSCI1911, 3)
+Credit(CSCI2911, 3)
+Credit(CSCI2912, 3)
+Credit(CSCI2916, 3)
+
+Term(201030)
+Term(201070)
+Term(201090)
+Term(201110)
+Term(201130)
+
+Init(¬Met(MATH1105) 
+	^ ¬Met(MATH1130) 
+	^ ¬Met(CSCI1911) 
+	^ ¬Met(CSCI2911) 
+	^ ¬Met(CSCI2912) 
+	^ ¬Met(CSCI2916)
+	^ Load(201030) <= 0
+	^ Load(201070) <= 0
+	^ Load(201090) <= 0
+	^ Load(201110) <= 0
+	^ Load(201130) <= 0)
+
+Goal(Met(MATH1105) 
+	^ Met(MATH1130) 
+	^ Met(CSCI1911) 
+	^ Met(CSCI2911) 
+	^ Met(CSCI2912) 
+	^ Met(CSCI2916) 
+	^ Load(201030) <= 9
+	^ Load(201070) <= 9
+	^ Load(201090) <= 9
+	^ Load(201110) <= 9
+	^ Load(201130) <= 9)
+	
+Action(Register(Crs, Trm)
+	Precond: Course(Crs)
+		^ Term(Trm)
+		^ ¬Met(Crs)
+	Effect: Met(Crs)
+		^ Load(Trm) += Credit(Crs))
+		
+[Register(Math1105, 201030),
+	Register(Math1130, 201030),
+	Register(CSCI1911, 201030),
+	Register(CSCI2911, 201070),
+	Register(CSCI2916, 201070),
+	Register(CSCI2912, 201090)]
